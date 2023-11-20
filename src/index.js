@@ -44,9 +44,9 @@ function handleClick(event) {
 
 //word array
 const question = [
-  "The Chosen Category Is Premier League Football Teams",
-  "The Chosen Category Is Films",
-  "The Chosen Category Is Cities"
+  "La catégorie choisie est celle des équipes de football de première division",
+  "La catégorie choisie est celle des films",
+  "La catégorie choisie est Villes",
 ];
 
 const categories = [
@@ -59,33 +59,33 @@ const categories = [
     "manchester-city",
     "newcastle-united"
   ],
-  ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
+  ["alien", "inspecteur-harry", "gladiateur", "trouver-nemo", "dent-de-la-mere"],
   ["manchester", "milan", "madrid", "amsterdam", "prague"]
 ];
 
 const hints = [
   [
-    "Based in Mersyside",
-    "Based in Mersyside",
-    "First Welsh team to reach the Premier Leauge",
-    "Owned by A russian Billionaire",
-    "Once managed by Phil Brown",
-    "2013 FA Cup runners up",
-    "Gazza's first club"
+    "Basé à Merseyside",
+    "Basé à Merseyside",
+    "Première équipe galloise à atteindre la Premier League",
+    "Propriété d'un milliardaire russe",
+    "Autrefois dirigé par Phil Brown",
+    "Finaliste de la FA Cup 2013",
+    "Premier club de Gazza"
   ],
   [
-    "Science-Fiction horror film",
-    "1971 American action film",
-    "Historical drama",
-    "Anamated Fish",
-    "Giant great white shark"
+    "Film d'horreur de science-fiction",
+    "Film d'action américain de 1971",
+    "Drame historique",
+    "Poisson animé",
+    "Grand requin blanc géant"
   ],
   [
-    "Northern city in the UK",
-    "Home of AC and Inter",
-    "Spanish capital",
-    "Netherlands capital",
-    "Czech Republic capital"
+    "Ville septentrionale du Royaume-Uni",
+    "Siège de l'AC et de l'Inter",
+    "Capitale de l'Espagne",
+    "Capitale des Pays-Bas",
+    "Capitale de la République tchèque",
   ]
 ];
 
@@ -121,7 +121,7 @@ function generateAnswerDisplay(word) {
 }
 
 function showHint() {
-  containerHint.innerHTML = `Clue - ${hint}`;
+  containerHint.innerHTML = `INDICE - ${hint}`;
 }
 
 buttonHint.addEventListener("click", showHint);
@@ -135,7 +135,7 @@ function init() {
   context.clearRect(0, 0, 400, 400);
   canvas();
   containerHint.innerHTML = `Clue -`;
-  livesDisplay.innerHTML = `You have ${life} lives!`;
+  livesDisplay.innerHTML = `VOUS AVEZ ${life} VIE!`;
   setAnswer();
   container.innerHTML = generateButton();
   container.addEventListener("click", handleClick);
@@ -154,7 +154,7 @@ function guess(event) {
   const answerArray = answer.split("");
   var counter = 0;
   if (answer === winningCheck) {
-    livesDisplay.innerHTML = `YOU WIN!`;
+    livesDisplay.innerHTML = `VOUS GAGNER!`;
     return;
   } else {
     if (life > 0) {
@@ -176,11 +176,11 @@ function guess(event) {
         counter = 0;
       }
       if (life > 1) {
-        livesDisplay.innerHTML = `You have ${life} lives!`;
+        livesDisplay.innerHTML = `VOUS AVEZ ${life} VIE!`;
       } else if (life === 1) {
-        livesDisplay.innerHTML = `You have ${life} life!`;
+        livesDisplay.innerHTML = `VOUS ${life} VIE!`;
       } else {
-        livesDisplay.innerHTML = `GAME OVER!`;
+        livesDisplay.innerHTML = `PARTIE TERMINER!`;
       }
     } else {
       return;
@@ -189,7 +189,7 @@ function guess(event) {
     //console.log(counter);
     //console.log(life);
     if (answer === winningCheck) {
-      livesDisplay.innerHTML = `YOU WIN!`;
+      livesDisplay.innerHTML = `VOUS GAGNER!`;
       return;
     }
   }
