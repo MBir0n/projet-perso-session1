@@ -308,7 +308,7 @@ function nbVictoir(){ // fonction permettant de changer le nombre de victoire
 
   mancheGagnerNb++;
   if(mancheGagnerNb != stopTimer){
-    setInterval(modifTimer,1000000000000000000000000000);
+    
     stopTimer = mancheGagner;
     console.log("test")
   }
