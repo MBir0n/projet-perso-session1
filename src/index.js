@@ -15,7 +15,11 @@ var context = myStickman.getContext("2d");
 let interval=setInterval(modifTimer,1000); //l'interval qui commence mon timer des l'ouverture de la page
   
 
-//generate alphabet button
+
+/**
+ *  genere des bouton de l'alphabet
+ * @returns string
+ */
 function generateButton() {
   var buttonsHTML = "abcdefghijklmnopqrstuvwxyz"
     .split("")
@@ -32,7 +36,11 @@ function generateButton() {
 
   return buttonsHTML;
 }
-
+/**
+ * dit quel bouton est clicker
+ * @param {PointerEvent} event 
+ * @returns null
+ */
 function handleClick(event) {
   const isButton = event.target.nodeName === "BUTTON";
   if (isButton) {
@@ -43,7 +51,6 @@ function handleClick(event) {
   }
   return;
 }
-//rajoute un timer conteur victoire-defaite
 //word array
 const question = [
   "La catégorie choisie est celle des équipes de football de première division",
@@ -95,8 +102,10 @@ const hints = [
   ["acteur celebre du film: Opération Dragon", "président américain", "chanteur canadien", "il est surnomé: Les muscles de Bruxelles", "président de Valve"]
 ];
 
-//set question,answer and hint
 
+/**
+ * genere la question, reponse et indice
+ */
 function setAnswer() {
   const categoryOrder = Math.floor(Math.random() * categories.length);
   const chosenCategory = categories[categoryOrder];
@@ -112,7 +121,11 @@ function setAnswer() {
   hint = hints[categoryOrder][wordOrder];
   answerDisplay.innerHTML = generateAnswerDisplay(chosenWord);
 }
-
+/**
+ * genere la disposition des lettre cacher
+ * @param {string} word 
+ * @returns string
+ */
 function generateAnswerDisplay(word) {
   var wordArray = word.split("");
   //console.log(wordArray);
@@ -125,13 +138,17 @@ function generateAnswerDisplay(word) {
   }
   return wordDisplay.join(" ");
 }
-
+/**
+ * montre l'indice
+ */
 function showHint() {
   containerHint.innerHTML = `INDICE - ${hint}`;
 }
 
 buttonHint.addEventListener("click", showHint);
-//setting initial condition
+/**
+ * fait la disposition de l'écran
+ */
 function init() {
   answer = "";
   hint = "";
@@ -154,7 +171,12 @@ window.onload = init();
 //reset (play again)
 buttonReset.addEventListener("click", init);
 
-//guess click
+
+/**
+ * gere les click d'essai
+ * @param {PointerEvent} event 
+ * @returns null
+ */
 function guess(event) {
   const guessWord = event.target.id;
   const answerArray = answer.split("");
@@ -205,12 +227,16 @@ function guess(event) {
 
 container.addEventListener("click", guess);
 
-// Hangman
+/**
+ * le pendue
+ */
 function animate() {
   drawArray[life]();
   //console.log(drawArray[life]);
 }
-
+/**
+ * la surface du pendue
+ */
 function canvas() {
   myStickman = document.getElementById("stickman");
   context = myStickman.getContext("2d");
@@ -218,7 +244,9 @@ function canvas() {
   context.strokeStyle = "#fff";
   context.lineWidth = 2;
 }
-
+/**
+ * dessine la tete
+ */
 function head() {
   myStickman = document.getElementById("stickman");
   context = myStickman.getContext("2d");
@@ -226,45 +254,69 @@ function head() {
   context.arc(60, 25, 10, 0, Math.PI * 2, true);
   context.stroke();
 }
-
+/**
+ * 
+ * @param {number} $pathFromx 
+ * @param {number} $pathFromy 
+ * @param {number} $pathTox 
+ * @param {number} $pathToy 
+ */
 function draw($pathFromx, $pathFromy, $pathTox, $pathToy) {
   context.moveTo($pathFromx, $pathFromy);
   context.lineTo($pathTox, $pathToy);
   context.stroke();
 }
-
+/**
+ * dessine la base de la potence
+ */
 function frame1() {
   draw(0, 150, 150, 150);
 }
-
+/**
+ * dessine poteau de potence
+ */
 function frame2() {
   draw(10, 0, 10, 600);
 }
-
+/**
+ * dessine barre transversal
+ */
 function frame3() {
   draw(0, 5, 70, 5);
 }
-
+/**
+ * dessine corde
+ */
 function frame4() {
   draw(60, 5, 60, 15);
 }
-
+/**
+ * dessine torse
+ */
 function torso() {
   draw(60, 36, 60, 70);
 }
-
+/**
+ * dessine bras droite
+ */
 function rightArm() {
   draw(60, 46, 100, 50);
 }
-
+/**
+ * dessine bras gauche
+ */
 function leftArm() {
   draw(60, 46, 20, 50);
 }
-
+/**
+ * dessine jambe droite
+ */
 function rightLeg() {
   draw(60, 70, 100, 100);
 }
-
+/**
+ * dessine jambe gauche
+ */
 function leftLeg() {
   draw(60, 70, 20, 100);
 }
@@ -281,26 +333,36 @@ var drawArray = [
   frame2,
   frame1
 ];
-function stopIntervall(){ //arrete l'interval
+/**
+ * arrete l'interval
+ */
+function stopIntervall(){ 
   clearInterval(interval);
 }
-function resetTimer(){ //permet au compteur de se remettre à 0 a chaque début de partie
+/**
+ * permet au compteur de se remettre à 0 a chaque début de partie
+ */
+function resetTimer(){ 
   let tempsReset=document.getElementById("chrono");
   let tempsResetChiffre=Number(tempsReset.innerHTML);
   tempsResetChiffre=0;
   tempsReset.innerHTML=(tempsResetChiffre);
   clearInterval(interval);
-  interval=setInterval(modifTimer, 1000)
-  
+  interval=setInterval(modifTimer, 1000);//pas la plus bele méthode mais la seul qui empêche mon timer d'accelerer a chaque utilisation de Rejouer
 }
-
-function modifTimer(){ // cette function change mon timer toute les seconde
+/**
+ * cette function change mon timer toute les seconde
+ */
+function modifTimer(){
   let temps=document.getElementById("chrono");
   let tempsChiffre=Number(temps.innerHTML);
   tempsChiffre++;
   temps.innerHTML=(tempsChiffre);
 }
-function nbVictoir(){ // fonction permettant de changer le nombre de victoire
+/**
+ * fonction permettant de changer le nombre de victoire
+ */
+function nbVictoir(){
   let mancheGagner=document.getElementById("victoire");
   let mancheGagnerNb=Number(mancheGagner.innerHTML);
   mancheGagner.innerHTML=(mancheGagnerNb);
