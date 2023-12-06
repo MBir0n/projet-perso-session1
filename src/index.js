@@ -13,7 +13,7 @@ const livesDisplay = document.getElementById("mylives");
 var myStickman = document.getElementById("stickman");
 var context = myStickman.getContext("2d");
 let interval=setInterval(modifTimer,1000); //l'interval qui commence mon timer des l'ouverture de la page
-
+let breakTimer =false;
   
 
 //generate alphabet button
@@ -284,13 +284,17 @@ var drawArray = [
 ];
 function stopIntervall(){ //
   clearInterval(interval);
+  breakTimer=true
 }
 function resetTimer(){ //permet au compteur de se remettre à 0 a chaque début de partie
   let temps=document.getElementById("chrono");
   let tempsChiffre=Number(temps.innerHTML);
   tempsChiffre=0;
   temps.innerHTML=(tempsChiffre);
-  interval=setInterval(modifTimer, 1000)
+  if(breakTimer=false){
+    interval=setInterval(modifTimer, 1000)
+  }
+  
 }
 
 function modifTimer(){ // cette function change mon timer toute les seconde
