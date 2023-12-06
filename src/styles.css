@@ -2,10 +2,16 @@ body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
       Helvetica, Arial, "Lucida Grande", sans-serif;
     background-color: #c1d72e;
-    color: white;
+    color: black;
     text-align: center;
     height: 100%;
     font-size: 18px;
+  }
+  footer{
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
+    background-color: aqua;
   }
   
   .wrappper {
@@ -82,5 +88,14 @@ body {
     background: white;
     border: solid 1px white;
     color: #c1d72e;
+  }
+  .image{
+    border-radius:50%;
+    width:200px;
+    height: 200px;
+  }
+  #tempsVictoire{
+    display:flex;
+    justify-content: space-evenly;
   }
   

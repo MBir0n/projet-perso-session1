@@ -12,6 +12,9 @@ const buttonReset = document.getElementById("reset");
 const livesDisplay = document.getElementById("mylives");
 var myStickman = document.getElementById("stickman");
 var context = myStickman.getContext("2d");
+Intervall();//l'interval qui commence mon timer des l'ouverture de la page
+
+  
 
 //generate alphabet button
 function generateButton() {
@@ -41,12 +44,14 @@ function handleClick(event) {
   }
   return;
 }
-
+//rajoute un timer conteur victoire-defaite
 //word array
 const question = [
   "La catégorie choisie est celle des équipes de football de première division",
   "La catégorie choisie est celle des films",
   "La catégorie choisie est Villes",
+  "la catégorie choisi est personnalité public",
+
 ];
 
 const categories = [
@@ -59,8 +64,9 @@ const categories = [
     "manchester-city",
     "newcastle-united"
   ],
-  ["alien", "inspecteur-harry", "gladiateur", "trouver-nemo", "dent-de-la-mere"],
-  ["manchester", "milan", "madrid", "amsterdam", "prague"]
+  ["alien", "inspecteur-harry", "gladiateur", "trouver-nemo", "dent-de-la-mer"],
+  ["manchester", "milan", "madrid", "amsterdam", "prague"],
+  ["bruce-lee", "donald-trump", "justin-bieber", "jean-claude-van-damme", "gabe-newell"]
 ];
 
 const hints = [
@@ -86,7 +92,8 @@ const hints = [
     "Capitale de l'Espagne",
     "Capitale des Pays-Bas",
     "Capitale de la République tchèque",
-  ]
+  ],
+  ["acteur celebre du film: Opération Dragon", "président américain", "chanteur canadien", "il est surnomé: Les muscles de Bruxelles", "président de Valve"]
 ];
 
 //set question,answer and hint
@@ -134,7 +141,7 @@ function init() {
   winningCheck = "";
   context.clearRect(0, 0, 400, 400);
   canvas();
-  containerHint.innerHTML = `Clue -`;
+  containerHint.innerHTML = `Indice -`;
   livesDisplay.innerHTML = `VOUS AVEZ ${life} VIE!`;
   setAnswer();
   container.innerHTML = generateButton();
@@ -190,6 +197,8 @@ function guess(event) {
     //console.log(life);
     if (answer === winningCheck) {
       livesDisplay.innerHTML = `VOUS GAGNER!`;
+      nbVictoir();//cette appelle à été rajouter pour appeler le compteur de victoire, il étais plus simple d'appeler une function que de la recréer ici
+      
       return;
     }
   }
@@ -273,3 +282,35 @@ var drawArray = [
   frame2,
   frame1
 ];
+function Intervall(){
+  setInterval(modifTimer,1000); 
+}
+function timer(){ //permet au compteur de se remettre à 0 a chaque début de partie
+  
+  let temps=document.getElementById("chrono");
+  let tempsChiffre=Number(temps.innerHTML);
+  tempsChiffre=0;
+  temps.innerHTML=(tempsChiffre);
+  
+}
+
+function modifTimer(){ // cette function change mon timer toute les seconde
+  let temps=document.getElementById("chrono");
+  let tempsChiffre=Number(temps.innerHTML);
+  tempsChiffre++;
+  temps.innerHTML=(tempsChiffre);
+}
+function nbVictoir(){ // fonction permettant de changer le nombre de victoire
+  let mancheGagner=document.getElementById("victoire");
+  let mancheGagnerNb=Number(mancheGagner.innerHTML);
+  let stopTimer = mancheGagner;
+
+
+  mancheGagnerNb++;
+  if(mancheGagnerNb != stopTimer){
+    setInterval(modifTimer,1000000000000000000000000000);
+    stopTimer = mancheGagner;
+    console.log("test")
+  }
+  mancheGagner.innerHTML=(mancheGagnerNb);
+}
