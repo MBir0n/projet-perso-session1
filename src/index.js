@@ -12,7 +12,7 @@ const buttonReset = document.getElementById("reset");
 const livesDisplay = document.getElementById("mylives");
 var myStickman = document.getElementById("stickman");
 var context = myStickman.getContext("2d");
-Intervall();//l'interval qui commence mon timer des l'ouverture de la page
+const interval=setInterval(modifTimer,1000); //l'interval qui commence mon timer des l'ouverture de la page
 
   
 
@@ -198,7 +198,7 @@ function guess(event) {
     if (answer === winningCheck) {
       livesDisplay.innerHTML = `VOUS GAGNER!`;
       nbVictoir();//cette appelle à été rajouter pour appeler le compteur de victoire, il étais plus simple d'appeler une function que de la recréer ici
-      
+      stopIntervall();
       return;
     }
   }
@@ -282,8 +282,9 @@ var drawArray = [
   frame2,
   frame1
 ];
-function Intervall(){
-  setInterval(modifTimer,1000); 
+function stopIntervall(){
+  console.log("allo")
+  clearInterval(interval);
 }
 function timer(){ //permet au compteur de se remettre à 0 a chaque début de partie
   
@@ -303,14 +304,5 @@ function modifTimer(){ // cette function change mon timer toute les seconde
 function nbVictoir(){ // fonction permettant de changer le nombre de victoire
   let mancheGagner=document.getElementById("victoire");
   let mancheGagnerNb=Number(mancheGagner.innerHTML);
-  let stopTimer = mancheGagner;
-
-
-  mancheGagnerNb++;
-  if(mancheGagnerNb != stopTimer){
-    
-    stopTimer = mancheGagner;
-    console.log("test")
-  }
   mancheGagner.innerHTML=(mancheGagnerNb);
 }
